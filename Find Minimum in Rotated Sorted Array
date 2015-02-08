@@ -1,0 +1,23 @@
+public class Solution {
+    public int findMin(int[] num) {
+        if(num == null)
+            throw new NullPointerException();
+        if(num.length==1)
+            return num[0];
+        if(num.length==2)
+            return Math.min(num[0], num[1]);
+        int l = 0;
+        int r = num.length-1;
+        while(l<r-1)
+        {
+            int m = (l+r)/2;
+            if(num[l]<num[m]&&num[m]>num[r])
+                l = m;
+            else if(num[m]<num[r]&&num[m]<num[l])
+                r = m;
+            else
+                return num[l];
+        }
+        return Math.min(num[l], num[l+1]);
+    }
+}
