@@ -1,0 +1,31 @@
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s==null || s.length()==0)
+            return 0;
+        if(s.length()==1)
+            return 1;
+            
+        int[] hash = new int[256];
+        Arrays.fill(hash, -1);
+        
+        int i = 0;
+        int max = 0;
+        int count = 0;
+        while(i<s.length())
+        {
+            char a = s.charAt(i);
+            if(hash[a]!=-1)
+            {
+                count = 0;
+                i = hash[a]+1;
+                Arrays.fill(hash, -1);
+            }
+            else
+            {
+                hash[a] = i++;
+                max = ++count>max?count:max;
+            }
+        }
+        return max;
+    }
+}
