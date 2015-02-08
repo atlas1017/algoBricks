@@ -1,0 +1,32 @@
+public class Solution {
+    public double findMedianSortedArrays(int A[], int B[]) {
+        int m = A.length;
+        int n = B.length;
+        double res = 0;
+        int len = m+n;
+        if(len%2 == 1)
+            res = findK(A,0,m,B,0,n,len/2+1);
+        else
+            res = (findK(A,0,m,B,0,n,len/2)+findK(A,0,m,B,0,n,len/2+1))/2;
+        return res;
+    }
+    
+    public double findK(int[] a,int as, int m, int[] b, int bs, int n, int k)
+    {
+        if(m>n)
+            return findK(b,bs,n,a,as,m,k);
+        if(m==0)
+            return b[bs+k-1];
+        if(k==1)
+            return Math.min(a[as],b[bs]);
+        
+        int da = Math.min(k/2, m);
+        int db = k-da;
+        if(a[da+as-1]<b[db+bs-1])
+            return findK(a,as+da,m-da,b,bs,n,k-da);
+        else if(a[da+as-1]>b[db+bs-1])
+            return findK(a,as,m,b,bs+db,n-db,k-db);
+        else
+            return a[as+da-1];
+    }
+}
