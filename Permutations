@@ -1,0 +1,27 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> permute(int[] num) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> nums = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(int i=0; i<num.length; i++)
+            nums.add(num[i]);
+        helper(res, nums, list);
+        return res;
+    }
+    
+    public void helper(ArrayList<ArrayList<Integer>> res, ArrayList<Integer> nums, ArrayList<Integer> list)
+    {
+        if(nums.size()==0)
+            res.add(list);
+        int len = nums.size();
+        for(int i=0; i<len; i++)
+        {
+            ArrayList<Integer> temp = new ArrayList<Integer>(list);
+            Integer one = nums.get(i);
+            nums.remove(i);
+            temp.add(one);
+            helper(res, nums, temp);
+            nums.add(i, one);
+        }
+    }
+}
