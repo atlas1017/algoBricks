@@ -1,0 +1,43 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
+        Arrays.sort(num);
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        int n1, n2, n3;
+        int val1;
+        n1 = 0;
+        val1 = Integer.MAX_VALUE;
+        
+        for(; n1<num.length-2; n1++){
+            if(num[n1] == val1)
+                continue;
+            val1 = num[n1];
+            n2 = n1+1;
+            n3 = num.length-1;
+            while(n2<n3){
+                int v2 = num[n2];
+                int v3 = num[n3];
+                int sum = num[n1]+num[n2]+num[n3];
+                if(sum<0){
+                    while(n2<n3 && num[n2]==v2)
+                        n2++;
+                }
+                else if(sum>0){
+                    while(n2<n3 && num[n3]==v3)
+                        n3--;
+                }
+                else {
+                    ArrayList<Integer> temp = new ArrayList<Integer>();
+                    temp.add(num[n1]);
+                    temp.add(num[n2]);
+                    temp.add(num[n3]);
+                    res.add(temp);
+                    while(n2<n3 && num[n2]==v2)
+                        n2++;
+                    while(n2<n3 && num[n3]==v3)
+                        n3--;
+                }
+            }
+        }
+        return res;
+    }
+}
