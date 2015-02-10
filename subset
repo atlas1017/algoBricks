@@ -1,0 +1,22 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        Arrays.sort(S);
+        ArrayList<Integer> one = new ArrayList<Integer>();
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(one);
+        helper(res,one,S,0);
+        return res;
+    }
+    
+    private void helper(ArrayList<ArrayList<Integer>> res, ArrayList<Integer> one, int[] s, int start)
+    {
+        for(int i=start; i<s.length; i++)
+        {
+            one.add(s[i]);
+            res.add(new ArrayList<Integer>(one));
+            helper(res, one, s, i+1);
+            one.remove(one.size()-1);
+        }
+        return;
+    }
+}
