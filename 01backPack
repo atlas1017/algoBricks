@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+
+public class backPack
+{
+	public static int getMax(int[] A, int m)
+	{
+		int[] dp = new int[m+1];
+		Arrays.fill(dp, 0);
+
+		for(int i=1; i<=A.length; i++)
+		{
+			for(int j=m; j>=1; j--)
+			{
+				if(j<A[i-1])
+					dp[j] = dp[j];
+				else
+					dp[j] = Math.max(dp[j], dp[j-A[i-1]]);
+			}
+		}
+		return dp[m];
+	}
+
+	public static void main(String[] args) {
+		int[] A = {1,2,5,34,23,21,43};
+		int m = 100;
+		int res = getMax(A, m);
+		System.out.println("the resulr is "+res);
+	}
+}
