@@ -15,7 +15,7 @@ public class backPack
 				if(j<A[i-1])
 					dp[j] = dp[j];
 				else
-					dp[j] = Math.max(dp[j], dp[j-A[i-1]]);
+					dp[j] = Math.max(dp[j], dp[j-A[i-1]] + A[i-1]);
 			}
 		}
 		return dp[m];
